@@ -35,7 +35,7 @@ function myFunction() {
       var tw = tweets[twCount];
       var date = new Date(tw.created_at).getTime()
       //前回チェックしたツイートまで到達したら解析終わり
-      if ((matched.length == 0) && (date <= timeLimit)) { break; }
+      if ((matched.length == 0) && (date <= lastTime)) { break; }
       if (date <= timeLimit) { break; }
       //このツイートにマッチするパターンを探す
       for(var i = 0; i < rule.patterns.length; i++) {
@@ -57,6 +57,6 @@ function myFunction() {
   
   //ログの更新
   logs[logs.length - 1] = new Date(tweets[0].created_at);
-  logSheet.getRange(1,1,1,rules.length).setValues([logs]);
+  logSheet.getRange(1,1,1,logs.length).setValues([logs]);
   SpreadsheetApp.flush();
 }
